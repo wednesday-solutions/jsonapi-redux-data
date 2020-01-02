@@ -4,8 +4,8 @@ module.exports = {
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'redux-jsonapi.js',
-    library: 'redux-jsonapi',
+    filename: 'jsonapi-redux-data.js',
+    library: 'jsonapi-redux-data',
     libraryTarget: 'umd'
   },
   externals: {
