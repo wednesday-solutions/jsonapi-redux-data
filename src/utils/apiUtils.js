@@ -6,7 +6,7 @@ import { setStore } from './';
 
 let latestApiClient = null;
 
-export const createApiClientWithTransForm = (
+export const createApiClientWithTransform = (
   baseURL,
   store,
   headers = { 'Content-Type': 'application/vnd.api+json' }
