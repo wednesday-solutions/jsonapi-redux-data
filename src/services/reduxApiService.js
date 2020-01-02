@@ -1,12 +1,15 @@
-import { deleteRequest, getRequest, patchRequest, postRequest } from './apiService';
+import { jsonApiCreators } from 'reducers/jsonApiReducer'
+import { selectApiDomain } from 'selectors/selectors'
+import {
+  deleteRequest,
+  getRequest,
+  patchRequest,
+  postRequest
+} from 'services/apiService'
+import { createDeepInclude } from 'utils/jsonApiUtils'
+import { getIncludeList, getStore } from 'utils'
 
-import { createDeepInclude } from '../utils/jsonApiUtils';
-import { getIncludeList, getStore } from '../utils';
-
-import { selectApiDomain } from '../selectors/selectors';
-import { jsonApiCreators } from '../reducers/jsonApiReducer';
-
-const { successApi } = jsonApiCreators;
+const { successApi } = jsonApiCreators
 
 /**
  *
@@ -23,12 +26,20 @@ const { successApi } = jsonApiCreators;
  * @param {} api: Custom Api Client instead of the latest created api client
  * @param {} axios: Special axios config
  **/
-export function getApi(requestPayload, api, axiosConfig) {
-  const { include, filter, pathname, levelOfNesting, transformList, id } = requestPayload;
-  let includeList = getIncludeList(requestPayload);
-  return getRequest(pathname, include, filter, id, api, axiosConfig).then(response =>
-    handleApiResponse(response, includeList, transformList, levelOfNesting)
-  );
+export function getApi (requestPayload, api, axiosConfig) {
+  const {
+    include,
+    filter,
+    pathname,
+    levelOfNesting,
+    transformList,
+    id
+  } = requestPayload
+  let includeList = getIncludeList(requestPayload)
+  return getRequest(pathname, include, filter, id, api, axiosConfig).then(
+    response =>
+      handleApiResponse(response, includeList, transformList, levelOfNesting)
+  )
 }
 /**
  * Make a post request and add api response to the redux store
@@ -43,12 +54,26 @@ export function getApi(requestPayload, api, axiosConfig) {
  * @param {} api: Custom Api Client instead of the latest created api client
  * @param {} axios: Special axios config
  */
-export function postApi(requestPayload, api, axiosConfig) {
-  const { include, filter, pathname, levelOfNesting, transformList, postData } = requestPayload;
-  let includeList = getIncludeList(requestPayload);
-  return postRequest(pathname, include, filter, postData, api, axiosConfig).then(response =>
+export function postApi (requestPayload, api, axiosConfig) {
+  const {
+    include,
+    filter,
+    pathname,
+    levelOfNesting,
+    transformList,
+    postData
+  } = requestPayload
+  let includeList = getIncludeList(requestPayload)
+  return postRequest(
+    pathname,
+    include,
+    filter,
+    postData,
+    api,
+    axiosConfig
+  ).then(response =>
     handleApiResponse(response, includeList, transformList, levelOfNesting)
-  );
+  )
 }
 
 /**
@@ -65,15 +90,31 @@ export function postApi(requestPayload, api, axiosConfig) {
  * @param {} axios: Special axios config
  *
  * */
-export function patchApi(requestPayload, api, axios) {
-  console.log('23');
-  const { include, filter, pathname, levelOfNesting, transformList, patchData, id } = requestPayload;
-  let includeList = getIncludeList(requestPayload);
-  patchData.data.id = id;
-  console.log({ patchData, includeList });
-  return patchRequest(pathname, include, filter, id, patchData, api, axios).then(response =>
+export function patchApi (requestPayload, api, axios) {
+  console.log('23')
+  const {
+    include,
+    filter,
+    pathname,
+    levelOfNesting,
+    transformList,
+    patchData,
+    id
+  } = requestPayload
+  let includeList = getIncludeList(requestPayload)
+  patchData.data.id = id
+  console.log({ patchData, includeList })
+  return patchRequest(
+    pathname,
+    include,
+    filter,
+    id,
+    patchData,
+    api,
+    axios
+  ).then(response =>
     handleApiResponse(response, includeList, transformList, levelOfNesting)
-  );
+  )
 }
 
 /**
@@ -90,12 +131,20 @@ export function patchApi(requestPayload, api, axios) {
  * @param {} axios: Special axios config
  *
  * */
-export function deleteApi(requestPayload, api, axios) {
-  const { include, fitler, pathname, levelOfNesting, transformList, id } = requestPayload;
-  let includeList = getIncludeList(requestPayload);
-  return deleteRequest(pathname, include, fitler, id, api, axios).then(response =>
-    handleApiResponse(response, includeList, transformList, levelOfNesting)
-  );
+export function deleteApi (requestPayload, api, axios) {
+  const {
+    include,
+    fitler,
+    pathname,
+    levelOfNesting,
+    transformList,
+    id
+  } = requestPayload
+  let includeList = getIncludeList(requestPayload)
+  return deleteRequest(pathname, include, fitler, id, api, axios).then(
+    response =>
+      handleApiResponse(response, includeList, transformList, levelOfNesting)
+  )
 }
 /**
  *
@@ -105,52 +154,28 @@ export function deleteApi(requestPayload, api, axios) {
  * @param  {} transformList: transformations to normalise data
  * @param  {} levelOfNesting: level of nesting in the include
  */
-function handleApiResponse(response, includeList, transformList, levelOfNesting) {
-  const { data, ok } = response;
+function handleApiResponse (
+  response,
+  includeList,
+  transformList,
+  levelOfNesting
+) {
+  const { data, ok } = response
   if (ok) {
-    const store = getStore();
-    const state = selectApiDomain(store.getState());
-    store.dispatch(successApi(createDeepInclude(data, includeList, transformList, levelOfNesting, state)));
+    const store = getStore()
+    const state = selectApiDomain(store.getState())
+    store.dispatch(
+      successApi(
+        createDeepInclude(
+          data,
+          includeList,
+          transformList,
+          levelOfNesting,
+          state
+        )
+      )
+    )
   } else {
-    throw new Error('Api Failure', data);
+    throw new Error('Api Failure', data)
   }
 }
-
-// /**
-//  * Make a put request and add api response to the redux store
-//  * @param  {} requestPayload: {
-//  *   include: object
-//  *   filter: object,
-//  *   pathname: String,
-//  *   levelOfNesting: number,
-//  *   transformList: object,
-//  *   putData: object
-//  * }
-//  * @param {} api: Custom Api Client instead of the latest created api client
-//  * @param {} axios: Special axios config
-//  *
-//  * */
-// export function putApi (requestPayload, api, axiosConfig) {
-//   const {
-//     include,
-//     pathname,
-//     levelOfNesting,
-//     transformList,
-//     putData,
-//     id,
-//     filter
-//   } = requestPayload
-//   let includeList = getIncludeList(requestPayload)
-//   const state = yield select(selectApiDomain)
-//   return putRequest(
-//     pathname,
-//     include,
-//     filter,
-//     id,
-//     putData,
-//     api,
-//     axiosConfig
-//   ).then(response =>
-//     handleApiResponse(response, includeList, transformList, levelOfNesting)
-//   )
-// }

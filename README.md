@@ -35,7 +35,7 @@
     - Make api call easily and from anywhere 
         ```
         ...
-        import { getApi, createReducerActions } from '../../jsonapi-redux-data'
+        import { getApi } from '../../jsonapi-redux-data'
         ...
 
         getApi({ pathname: '<pathname>', include: '<include-string>' })

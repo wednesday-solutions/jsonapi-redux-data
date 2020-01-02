@@ -1,6 +1,6 @@
-import { getLatestApiClient } from '../utils/apiUtils';
+import { getLatestApiClient } from 'utils/apiUtils';
 
-import { getIncludeFilterAndId } from '../utils';
+import { getIncludeFilterAndId } from 'utils';
 
 /**
  * GET HTTP REQUEST, uses the apisauce.get underneath the hood.
@@ -14,28 +14,6 @@ import { getIncludeFilterAndId } from '../utils';
 export const getRequest = (pathname, include = '', filter = '', id = '', api = getLatestApiClient(), axiosConfig) => {
   const { includeString, filterString, idString } = getIncludeFilterAndId(include, filter, id);
   return api.get(`${pathname}${idString}${includeString}${filterString}`, null, axiosConfig);
-};
-/**
- * PUT HTTP REQUEST, uses the apisauce.get underneath the hood.
- * @param  {} pathname: the endpoint path
- * @param  {} include: the jsonapi include string
- * @param  {} filter: the jsonapi filter string
- * @param  {} id: the id of the PUT request.
- * @param  {} putData: request body
- * @param  {} api: default is getLatestApiClient()
- * @param  {} axiosConfig: custom axiosConfig for this request
- */
-export const putRequest = (
-  pathname,
-  include = '',
-  filter = '',
-  id = '',
-  putData = {},
-  api = getLatestApiClient(),
-  axiosConfig
-) => {
-  const { includeString, filterString, idString } = getIncludeFilterAndId(include, filter, id);
-  return api.put(`${pathname}${idString}${includeString}${filterString}`, putData, axiosConfig);
 };
 
 /**

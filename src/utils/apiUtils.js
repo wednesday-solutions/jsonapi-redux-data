@@ -2,7 +2,7 @@ import { camelCase, snakeCase } from 'lodash';
 
 import { create } from 'apisauce';
 import mapKeysDeep from 'map-keys-deep';
-import { setStore } from './';
+import { setStore } from 'utils';
 
 let latestApiClient = null;
 

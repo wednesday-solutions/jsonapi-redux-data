@@ -2,9 +2,6 @@ import camelCase from 'lodash/camelCase';
 import pluralize from 'pluralize';
 import uniq from 'lodash/uniq';
 
-export * from './apiUtils';
-export * from './jsonApiUtils';
-
 let store = null;
 
 export function getIncludeList(action) {
@@ -46,3 +43,6 @@ export function setStore(s) {
 export function getStore() {
   return store;
 }
+
+export * from 'utils/apiUtils';
+export * from 'utils/jsonApiUtils';
