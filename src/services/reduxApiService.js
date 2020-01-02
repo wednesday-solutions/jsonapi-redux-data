@@ -91,7 +91,6 @@ export function postApi (requestPayload, api, axiosConfig) {
  *
  * */
 export function patchApi (requestPayload, api, axios) {
-  console.log('23')
   const {
     include,
     filter,
@@ -103,7 +102,6 @@ export function patchApi (requestPayload, api, axios) {
   } = requestPayload
   let includeList = getIncludeList(requestPayload)
   patchData.data.id = id
-  console.log({ patchData, includeList })
   return patchRequest(
     pathname,
     include,
