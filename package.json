@@ -1,17 +1,17 @@
 {
-  "name": "react-template",
+  "name": "jsonapi-redux-data",
   "version": "0.0.0",
-  "description": "A template react application",
+  "description": "jsonapi-redux-data",
   "repository": {
     "type": "git",
-    "url": "git://github.com/wednesday-solutions/react-template.git"
+    "url": "git://github.com/wednesday-solutions/jsonapi-redux-data.git"
   },
   "engines": {
     "npm": ">=5",
     "node": ">=8.15.1"
   },
   "author": "Mac",
-  "homepage": "http://wednesday-solutions.github.io/react-template",
+  "homepage": "https://github.com/wednesday-solutions/jsonapi-redux-data",
   "license": "MIT",
   "scripts": {
     "analyze:clean": "rimraf stats.json",
