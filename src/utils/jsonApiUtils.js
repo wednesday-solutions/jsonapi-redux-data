@@ -1,21 +1,22 @@
 import get from 'lodash/get'
 import uniqBy from 'lodash/uniqBy'
 import range from 'lodash/range'
-import camelCase from 'lodash/camelCase'
-import pluralize from 'pluralize'
+import { pluralCamel, singularCamel } from 'utils'
 
 function updateStateWithTransfom (state, dataItem, transformList) {
-  if (transformList[camelCase(dataItem.type)]) {
-    state[transformList[camelCase(dataItem.type)]][dataItem.id] = {
-      ...state[transformList[camelCase(dataItem.type)]][dataItem.id],
+  if (transformList[pluralCamel(dataItem.type)]) {
+    state[transformList[pluralCamel(dataItem.type)]][dataItem.id] = {
+      ...state[transformList[pluralCamel(dataItem.type)]][dataItem.id],
       ...dataItem.attributes,
+      relationships: dataItem.relationships,
       id: dataItem.id
     }
   }
-  if (state[camelCase(dataItem.type)]) {
-    state[camelCase(dataItem.type)][dataItem.id] = {
-      ...state[camelCase(dataItem.type)][dataItem.id],
+  if (state[pluralCamel(dataItem.type)]) {
+    state[pluralCamel(dataItem.type)][dataItem.id] = {
+      ...state[pluralCamel(dataItem.type)][dataItem.id],
       ...dataItem.attributes,
+      relationships: dataItem.relationships,
       id: dataItem.id
     }
   }
@@ -51,9 +52,13 @@ function createMergedStateObject (
         }
         // no need for empty arrays
         if (dataItem.relationships[relationship].data.length) {
-          state[camelCase(dataItem.type)][dataItem.id][relationship] = {
+          state[pluralCamel(dataItem.type)][dataItem.id][
+            pluralCamel(relationship)
+          ] = {
             ...dataItem.relationships[relationship].data,
-            ...state[camelCase(dataItem.type)][dataItem.id][relationship]
+            ...state[pluralCamel(dataItem.type)][dataItem.id][
+              pluralCamel(relationship)
+            ]
           }
         }
 
@@ -61,12 +66,13 @@ function createMergedStateObject (
           // it's the data that is being created so add transforms from the previous state
           includes.forEach(includedKey => {
             if (
-              includedKey === pluralize.plural(relationship) ||
-              includedKey === pluralize.singular(relationship)
+              includedKey === pluralCamel(relationship) ||
+              includedKey === singularCamel(relationship)
             ) {
               // pluralize this so that we are always comparing lists to lists and not list
-              includedKey = pluralize.plural(relationship)
-              state[camelCase(dataItem.type)][dataItem.id][
+              includedKey = pluralCamel(relationship)
+              
+              state[pluralCamel(dataItem.type)][dataItem.id][
                 relationship
               ] = uniqBy(dataItem.relationships[relationship].data, 'id').map(
                 relationshipData => {
@@ -84,10 +90,10 @@ function createMergedStateObject (
                     // iterate this array and populate the values that we couldn't find the first time
                     // around
                     callAgain.push({
-                      relationship,
+                      relationship: pluralCamel(relationship),
                       id: relationshipData.id,
                       includedKey,
-                      stateType: camelCase(dataItem.type),
+                      stateType: pluralCamel(dataItem.type),
                       stateId: dataItem.id
                     })
                   }
@@ -106,12 +112,88 @@ function createMergedStateObject (
   })
   range(1, levelOfNesting + 1).forEach(() => {
     callAgain.forEach(item => {
-      state[camelCase(item.stateType)][item.stateId][item.relationship] = state[
-        camelCase(item.stateType)
-      ][item.stateId][item.relationship].map(data => ({
-        ...data,
-        ...state[item.includedKey][data.id]
-      }))
+      // withTransform
+      const transformStateType =
+        transformList[item.stateType] || transformList[pluralCamel(item.stateType)]
+      const transformItemRelationship =
+        transformList[item.relationship] ||
+        transformList[pluralCamel(item.relationship)]
+      if (
+        transformItemRelationship &&
+        state[pluralCamel(item.stateType)][item.stateId][
+          transformItemRelationship
+        ]
+      ) {
+        state[pluralCamel(item.stateType)][item.stateId][
+          transformItemRelationship
+        ] = state[pluralCamel(item.stateType)][item.stateId][
+          transformItemRelationship
+        ].map(data => ({
+          ...data,
+          ...state[item.includedKey][data.id]
+        }))
+      } else if (
+        transformStateType &&
+        state[transformStateType][item.stateId][transformItemRelationship]
+      ) {
+        state[transformStateType][item.stateId][
+          transformItemRelationship
+        ] = state[transformStateType][item.stateId][
+          transformItemRelationship
+        ].map(data => ({
+          ...data,
+          ...state[item.includedKey][data.id]
+        }))
+      } else if (
+        state[pluralCamel(item.stateType)][item.stateId][
+          pluralCamel(item.relationship)
+        ]
+      ) {
+        if (
+          !(
+            state[pluralCamel(item.stateType)][item.stateId][
+              pluralCamel(item.relationship)
+            ] instanceof Array
+          )
+        ) {
+          state[pluralCamel(item.stateType)][item.stateId][
+            pluralCamel(item.relationship)
+          ] = Object.values(
+            state[pluralCamel(item.stateType)][item.stateId][
+              pluralCamel(item.relationship)
+            ]
+          )
+        }
+
+        state[pluralCamel(item.stateType)][item.stateId][
+          pluralCamel(item.relationship)
+        ] = state[pluralCamel(item.stateType)][item.stateId][
+          pluralCamel(item.relationship)
+        ].map(data => ({
+          ...data,
+          ...state[item.includedKey][data.id]
+        }))
+      }
+      else if (state[item.stateType][item.stateId][item.relationship]) {
+        if (
+          !(
+            state[item.stateType][item.stateId][item.relationship] instanceof
+            Array
+          )
+        ) {
+          state[item.stateType][item.stateId][
+            item.relationship
+          ] = Object.values(
+            state[item.stateType][item.stateId][item.relationship]
+          )
+        }
+        state[item.stateType][item.stateId][item.relationship] = state[
+          item.stateType
+        ][item.stateId][item.relationship].map(data => ({
+          ...data,
+          ...state[item.includedKey][data.id]
+        }))
+      }
     })
   })
 
@@ -136,6 +218,11 @@ export function createDeepInclude (
   // Create a consolidated state object with all the includedKeys
   state = addKeysToState(includes, state)
   state = addKeysToState(Object.keys(transformList), state)
+  // update all keys to plural camel case 
+  Object.keys(transformList).forEach(transformListItem => {
+    transformList[pluralCamel(transformListItem)] = pluralCamel(transformList[transformListItem])
+    delete transformList[transformListItem]
+  })
   // Extract data and included from the jsonApiResponse Object
   const { data, included } = jsonApiResponse
 

@@ -1,8 +1,11 @@
 import camelCase from 'lodash/camelCase';
-import pluralize from 'pluralize';
+import { plural, singular } from 'pluralize';
 import uniq from 'lodash/uniq';
 
 let store = null;
+
+export const pluralCamel = item => plural(camelCase(item))
+export const singularCamel = item => singular(camelCase(item))
 
 export function getIncludeList(action) {
   const { include, pathname } = action;
@@ -12,7 +15,7 @@ export function getIncludeList(action) {
       .join('.')
       .split('.')
       .concat(pathname)
-      .map(i => pluralize.plural(camelCase(i)))
+      .map(i => pluralCamel(i))
   );
 }
 

@@ -5,7 +5,7 @@ import {
   getRequest,
   patchRequest,
   postRequest
-} from 'services/apiService'
+} from './apiService'
 import { createDeepInclude } from 'utils/jsonApiUtils'
 import { getIncludeList, getStore } from 'utils'
 
