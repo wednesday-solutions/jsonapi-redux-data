@@ -39,25 +39,26 @@ function createMergedStateObject (
     // as the property of state[dataItem.type] to add all the attributes data.
     // Since it is in a map it can be accessed in O(1) complexity
     updateStateWithTransfom(state, dataItem, transformList)
-
     // if this particular item has any relationships then we need to iterate over those relationships
     Object.keys(get(dataItem, 'relationships', {})).forEach(relationship => {
       if (dataItem.relationships[relationship].data) {
         // if data is present check if it is of type array if not convert it into an array
         // so that it can be iterated easily.
+        let normalise = pluralCamel
         if (!(dataItem.relationships[relationship].data instanceof Array)) {
           dataItem.relationships[relationship].data = [
             dataItem.relationships[relationship].data
           ]
+          normalise = singularCamel
         }
         // no need for empty arrays
         if (dataItem.relationships[relationship].data.length) {
           state[pluralCamel(dataItem.type)][dataItem.id][
-            pluralCamel(relationship)
+            normalise(relationship)
           ] = {
             ...dataItem.relationships[relationship].data,
             ...state[pluralCamel(dataItem.type)][dataItem.id][
-              pluralCamel(relationship)
+              normalise(relationship)
             ]
           }
         }
@@ -73,7 +74,7 @@ function createMergedStateObject (
               includedKey = pluralCamel(relationship)
               
               state[pluralCamel(dataItem.type)][dataItem.id][
-                relationship
+                normalise(relationship)
               ] = uniqBy(dataItem.relationships[relationship].data, 'id').map(
                 relationshipData => {
                   if (transformList[includedKey]) {
@@ -90,7 +91,7 @@ function createMergedStateObject (
                     // iterate this array and populate the values that we couldn't find the first time
                     // around
                     callAgain.push({
-                      relationship: pluralCamel(relationship),
+                      relationship: normalise(relationship),
                       id: relationshipData.id,
                       includedKey,
                       stateType: pluralCamel(dataItem.type),
@@ -117,7 +118,7 @@ function createMergedStateObject (
         transformList[item.stateType] || transformList[pluralCamel(item.stateType)]
       const transformItemRelationship =
         transformList[item.relationship] ||
-        transformList[pluralCamel(item.relationship)]
+        transformList[item.relationship]
       if (
         transformItemRelationship &&
         state[pluralCamel(item.stateType)][item.stateId][
@@ -146,29 +147,29 @@ function createMergedStateObject (
         }))
       } else if (
         state[pluralCamel(item.stateType)][item.stateId][
-          pluralCamel(item.relationship)
+          item.relationship
         ]
       ) {
         if (
           !(
             state[pluralCamel(item.stateType)][item.stateId][
-              pluralCamel(item.relationship)
+              item.relationship
             ] instanceof Array
           )
         ) {
           state[pluralCamel(item.stateType)][item.stateId][
-            pluralCamel(item.relationship)
+            item.relationship
           ] = Object.values(
             state[pluralCamel(item.stateType)][item.stateId][
-              pluralCamel(item.relationship)
+              item.relationship
             ]
           )
         }
 
         state[pluralCamel(item.stateType)][item.stateId][
-          pluralCamel(item.relationship)
+          item.relationship
         ] = state[pluralCamel(item.stateType)][item.stateId][
-          pluralCamel(item.relationship)
+          item.relationship
         ].map(data => ({
           ...data,
           ...state[item.includedKey][data.id]
