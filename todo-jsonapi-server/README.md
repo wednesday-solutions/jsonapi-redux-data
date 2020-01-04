@@ -6,6 +6,11 @@
   ```
   yarn
   ```
+- Setup the environment
+    *   `lux db:reset`
+    *   `lux db:migrate`
+    *   `lux db:seed`
+    *   `lux serve`
 - Run the server using 
   ```
   yarn start
