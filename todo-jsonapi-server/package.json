@@ -1,0 +1,22 @@
+{
+  "name": "todo",
+  "version": "0.0.1",
+  "description": "",
+  "main": "app/index.js",
+  "scripts": {
+    "start": "lux serve",
+    "test": "lux test"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "babel-core": "6.24.1",
+    "babel-preset-lux": "2.0.2",
+    "knex": "0.13.0",
+    "lux-framework": "1.2.0",
+    "sqlite3": "https://github.com/mapbox/node-sqlite3/tarball/master"
+  },
+  "devDependencies": {
+    "faker": "4.1.0"
+  }
+}
