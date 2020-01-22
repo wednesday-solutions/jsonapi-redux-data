@@ -1,4 +1,5 @@
-import { camelCase, snakeCase } from 'lodash'
+import camelCase from 'lodash/camelCase'
+import snakeCase from 'lodash/snakeCase'
 
 import { create } from 'apisauce'
 import mapKeysDeep from 'map-keys-deep'

@@ -1,6 +1,8 @@
-import camelCase from 'lodash/camelCase';
-import { plural, singular } from 'pluralize';
+import camelCase from 'lodash/fp/camelCase';
 import uniq from 'lodash/uniq';
+import uniqBy from 'lodash/uniqBy';
+import { plural, singular } from 'pluralize';
+
 
 let store = null;
 
@@ -36,7 +38,7 @@ export function getIncludeFilterAndId(i, f, id) {
 }
 
 export const overwriteMerge = (destinationArray, sourceArray, options) => {
-  return _.uniqBy(destinationArray.concat(...sourceArray), 'id');
+  return uniqBy(destinationArray.concat(...sourceArray), 'id');
 };
 
 export function setStore(s) {

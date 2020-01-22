@@ -1,7 +1,6 @@
 import { createActions } from 'reduxsauce'
 import { fromJS } from 'immutable'
 import merge from 'deepmerge'
-import produce from 'immer'
 import { overwriteMerge } from 'utils'
 
 export const createReducerActions = () =>
@@ -14,9 +13,8 @@ export const {
 } = createReducerActions()
 export const initialState = fromJS({})
 
-export const jsonApiReducer = (state = initialState, action) =>
-  produce(state, () => {
-    switch (action.type) {
+export const jsonApiReducer = (state = initialState, action) => {
+  switch (action.type) {
       case jsonApiTypes.SUCCESS_API:
         return fromJS(
           merge.all([state.toJS(), action.responsePayload], {
@@ -25,6 +23,7 @@ export const jsonApiReducer = (state = initialState, action) =>
         )
     }
     return state
-  })
+}
+    
 
 export default jsonApiReducer
