@@ -11,46 +11,48 @@ Provides methods to make your API call as well as updates the redux store with t
 
 - Setup in 3 easy steps
 
-  - Update the reducers / rootReducers like this
+## Usage
 
-    ```
-    ...
-    import { jsonApiReducer } from 'jsonapi-redux-data'
-    ...
-    const rootReducer = combineReducers({
-        ...,
-        api: jsonApiReducer,
-        ...
-    })
-    ...
+- Update the reducers / rootReducers like this
 
-    ```
+  ```
+  ...
+  import { jsonApiReducer } from 'jsonapi-redux-data'
+  ...
+  const rootReducer = combineReducers({
+      ...,
+      api: jsonApiReducer,
+      ...
+  })
+  ...
 
-  - Create the api client preferrably in the app.js
+  ```
 
-    ```
-    ...
-    import { createApiClientWithTransform } from './jsonapi-redux-data'
-    ...
-    // Create redux store with history
-    const initialState = {};
-    const store = configureStore(initialState, history);
-    ...
+- Create the api client preferrably in the app.js
 
-    createApiClientWithTransform('<base-url>', store)
-    ...
-    ```
+  ```
+  ...
+  import { createApiClientWithTransform } from './jsonapi-redux-data'
+  ...
+  // Create redux store with history
+  const initialState = {};
+  const store = configureStore(initialState, history);
+  ...
 
-  - Make api call easily and from anywhere
+  createApiClientWithTransform('<base-url>', store)
+  ...
+  ```
 
-    ```
-    ...
-    import { getApi } from '../../jsonapi-redux-data'
-    ...
+- Make api call easily and from anywhere
 
-    getApi({ pathname: '<pathname>', include: '<include-string>' })
-    ...
-    ```
+  ```
+  ...
+  import { getApi } from '../../jsonapi-redux-data'
+  ...
+
+  getApi({ pathname: '<pathname>', include: '<include-string>' })
+  ...
+  ```
 
 ## API Documentation
 
