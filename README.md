@@ -58,69 +58,6 @@ Provides methods to make your API call as well as updates the redux store with t
 
 ### getApi
 
-```
-function getApi(requestPayload, api, axiosConfig)
-```
-
-It performs a HTTP REQUEST GET and adds the api response to the redux store.
-
-```
-/**
- *
- * Make a get request and add api response to the redux store.
- *
- * @param  {} requestPayload: {
- *   include: object
- *   filter: object,
- *   pathname: String,
- *   levelOfNesting: number,
- *   transformList: object,
- *   id: String
- * }
- * @param {} api: Custom Api Client instead of the latest created api client
- * @param {} axios: Special axios config
- **/
-
-```
-
-###
-
-/\*\*
-
-- Make a post request and add api response to the redux store
-- @param {} requestPayload: {
--     include: object
--     filter: object,
--     pathname: String,
--     levelOfNesting: number,
--     transformList: object,
--     postData: object
-- }
-- @param {} api: Custom Api Client instead of the latest created api client
-- @param {} axios: Special axios config
-  \*/
-  export function postApi
-
-```
-function getRequest(pathname, include, filter, api, axiosConfig)
-```
-
-It performs a HTTP REQUEST GET and uses the `apisauce.get` underneath the hood.
-
-```
-/**
-* @param  {} pathname: the endpoint path
-* @param  {} include: the jsonapi include string
-* @param  {} filter: the jsonapi filter string
-* @param  {} id: the id of the GET request.
-* @param  {} api: default is getLatestApiClient()
-* @param  {} axiosConfig: custom axiosConfig for this request
-*/
-
-```
-
-### getApi
-
 Make a get request and add api response to the redux store.
 
 ```
