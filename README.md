@@ -54,6 +54,25 @@ Provides methods to make your API call as well as updates the redux store with t
   ...
   ```
 
+## Example Usage
+
+# getApi
+
+```
+  getApi({
+    pathname: 'tasks',
+    includes: 'lists',
+    levelOfNesting: 3
+  });
+```
+
+Invoking this method will
+
+- make an api call to `base-url/tasks`
+- include lists in the response
+- dispatch an action of type `SUCCESS_API`
+- update the api reducer in the redux store with the formatted response.
+
 ## API Documentation
 
 ### getApi

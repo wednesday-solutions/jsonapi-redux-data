@@ -19,11 +19,11 @@ module.exports = {
   resolve: {
     modules: ['node_modules', 'app'],
     alias: {
-      'src': path.resolve(__dirname, './src'),
-      'services': path.resolve(__dirname, './src/services'),
-      'selectors': path.resolve(__dirname, './src/selectors'),
-      'reducers': path.resolve(__dirname, './src/reducers'),
-      'utils': path.resolve(__dirname, './src/utils')
+      src: path.resolve(__dirname, './src'),
+      services: path.resolve(__dirname, './src/services'),
+      selectors: path.resolve(__dirname, './src/selectors'),
+      reducers: path.resolve(__dirname, './src/reducers'),
+      utils: path.resolve(__dirname, './src/utils')
     },
     extensions: ['.js', '.jsx', '.react.js'],
     mainFields: ['browser', 'jsnext:main', 'main']

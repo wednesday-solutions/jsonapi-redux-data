@@ -35,7 +35,8 @@
     "test:watch": "cross-env NODE_ENV=test jest --watchAll",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "prettify": "prettier --write",
-    "webpack": "webpack -p --mode=production"
+    "webpack:prod": "webpack -p --mode=production",
+    "prepublish": "webpack:prod"
   },
   "browserslist": [
     "last 2 versions",
