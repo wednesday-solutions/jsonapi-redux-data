@@ -127,11 +127,7 @@ Make a delete request and add api response to the redux store
 /**
  *
  * @param  {} requestPayload: {
- *   include: object
- *   filter: object,
  *   pathname: String,
- *   levelOfNesting: number,
- *   transformList: object,
  *   id: String
  * }
  * @param {} api: Custom Api Client instead of the latest created api client
@@ -198,8 +194,6 @@ DELETE HTTP REQUEST, uses the apisauce.get underneath the hood.
 ```
 /**
  * @param  {} pathname
- * @param  {} include: the jsonapi include string
- * @param  {} filter: the jsonapi filter string
  * @param  {} id: the id of the DELETE request.
  * @param  {} api: default is getLatestApiClient()
  * @param  {} axiosConfig: custom axiosConfig for this request
