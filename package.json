@@ -23,6 +23,7 @@
   "author": "Mac",
   "homepage": "https://github.com/wednesday-solutions/jsonapi-redux-data",
   "license": "MIT",
+  "main": "dist/jsonapi-redux-data",
   "scripts": {
     "lint": "npm run lint:js",
     "lint:eslint": "eslint --ignore-path .eslintignore",
