@@ -32,7 +32,7 @@ Provides methods to make your API call as well as updates the redux store with t
 
   ```
   ...
-  import { createApiClientWithTransform } from './jsonapi-redux-data'
+  import { createApiClientWithTransform } from 'jsonapi-redux-data'
   ...
   // Create redux store with history
   const initialState = {};
