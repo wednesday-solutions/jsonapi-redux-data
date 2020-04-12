@@ -36,7 +36,7 @@
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "prettify": "prettier --write",
     "webpack:prod": "webpack -p --mode=production",
-    "prepublishOnly": "yarn webpack:prod"
+    "prepublishOnly": "yarn webpack:prod && gcmsg 'updating dist'"
   },
   "browserslist": [
     "last 2 versions",
