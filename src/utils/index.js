@@ -3,11 +3,10 @@ import uniq from 'lodash/uniq';
 import uniqBy from 'lodash/uniqBy';
 import { plural, singular } from 'pluralize';
 
-
 let store = null;
 
-export const pluralCamel = item => plural(camelCase(item))
-export const singularCamel = item => singular(camelCase(item))
+export const pluralCamel = item => plural(camelCase(item));
+export const singularCamel = item => singular(camelCase(item));
 
 export function getIncludeList(action) {
   const { include, pathname } = action;
@@ -37,6 +36,9 @@ export function getIncludeFilterAndId(i, f, id) {
   return { includeString, filterString, idString };
 }
 
+export const combineMerge = (destinationArray, sourceArray, options) => {
+  return sourceArray;
+};
 export const overwriteMerge = (destinationArray, sourceArray, options) => {
   return uniqBy(destinationArray.concat(...sourceArray), 'id');
 };

@@ -21,6 +21,7 @@ function updateStateWithTransfom(state, dataItem, transformList) {
       id: dataItem.id
     };
   }
+  return state;
 }
 function createMergedStateObject(
   dataArray = [],
@@ -148,12 +149,6 @@ function createMergedStateObject(
       }
     });
   });
-
-  Object.keys(state).forEach(key => {
-    if (isEmpty(state[key])) {
-      delete state[key];
-    }
-  });
   return state;
 }
 
@@ -170,11 +165,28 @@ export function createDeepInclude(
   includes = [],
   transformList = {},
   levelOfNesting = 0,
-  state = {}
+  state = {},
+  deletedId
 ) {
   // Create a consolidated state object with all the includedKeys
+  if (deletedId) {
+    const deletedKey = pluralCamel(includes[0]);
+    delete state[deletedKey][deletedId];
+    Object.keys(state).forEach(stateKey => {
+      Object.keys(state[stateKey]).forEach(dataItem => {
+        console.log(stateKey, dataItem, deletedKey);
+        if (state[stateKey][dataItem] && state[stateKey][dataItem][deletedKey]) {
+          state[stateKey][dataItem][deletedKey] = state[stateKey][dataItem][deletedKey].filter(i => {
+            return i.id != deletedId;
+          });
+        }
+      });
+    });
+    return state;
+  }
   state = addKeysToState(includes, state);
   state = addKeysToState(Object.keys(transformList), state);
+  state = addKeysToState(Object.values(transformList), state);
   // update all keys to plural camel case
   Object.keys(transformList).forEach(transformListItem => {
     transformList[pluralCamel(transformListItem)] = pluralCamel(transformList[transformListItem]);
@@ -185,6 +197,11 @@ export function createDeepInclude(
 
   state = createMergedStateObject(included, includes, transformList, state, levelOfNesting, true);
   state = createMergedStateObject(data, includes, transformList, state, levelOfNesting, true);
+  Object.keys(state).forEach(key => {
+    if (isEmpty(state[key])) {
+      delete state[key];
+    }
+  });
   return state;
 }
 

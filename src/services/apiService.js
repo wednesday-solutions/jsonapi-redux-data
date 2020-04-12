@@ -40,22 +40,13 @@ export const postRequest = (
 /**
  * DELETE HTTP REQUEST, uses the apisauce.get underneath the hood.
  * @param  {} pathname
- * @param  {} include: the jsonapi include string
- * @param  {} filter: the jsonapi filter string
  * @param  {} id: the id of the DELETE request.
  * @param  {} api: default is getLatestApiClient()
  * @param  {} axiosConfig: custom axiosConfig for this request
  */
-export const deleteRequest = (
-  pathname,
-  include = '',
-  filter = '',
-  id = '',
-  api = getLatestApiClient(),
-  axiosConfig
-) => {
-  const { includeString, filterString, idString } = getIncludeFilterAndId(include, filter, id);
-  return api.delete(`${pathname}${idString}${includeString}${filterString}`, null, axiosConfig);
+export const deleteRequest = (pathname, id = '', api = getLatestApiClient(), axiosConfig) => {
+  const { idString } = getIncludeFilterAndId(null, null, id);
+  return api.delete(`${pathname}${idString}`, null, axiosConfig);
 };
 
 /**
