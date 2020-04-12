@@ -10,6 +10,16 @@
     "npm": ">=5",
     "node": ">=8.15.1"
   },
+  "keywords": [
+    "jsonapi",
+    "redux",
+    "json-api",
+    "redux-data",
+    "reactjs",
+    "react",
+    "api",
+    "apisauce"
+  ],
   "author": "Mac",
   "homepage": "https://github.com/wednesday-solutions/jsonapi-redux-data",
   "license": "MIT",
