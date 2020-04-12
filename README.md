@@ -47,7 +47,7 @@ Provides methods to make your API call as well as updates the redux store with t
 
   ```
   ...
-  import { getApi } from '../../jsonapi-redux-data'
+  import { getApi } from 'jsonapi-redux-data'
   ...
 
   getApi({ pathname: '<pathname>', include: '<include-string>' })
