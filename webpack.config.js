@@ -7,7 +7,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: 'jsonapi-redux-data.js',
     library: 'jsonapi-redux-data',
-    libraryTarget: 'umd'
+    libraryTarget: 'commonjs2'
   },
   externals: {
     lodash: {
