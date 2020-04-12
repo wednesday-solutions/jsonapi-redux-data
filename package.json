@@ -1,6 +1,6 @@
 {
   "name": "jsonapi-redux-data",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "jsonapi-redux-data",
   "repository": {
     "type": "git",
@@ -36,7 +36,7 @@
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "prettify": "prettier --write",
     "webpack:prod": "webpack -p --mode=production",
-    "prepublishOnly": "yarn webpack:prod'"
+    "prepublishOnly": "yarn webpack:prod"
   },
   "browserslist": [
     "last 2 versions",
