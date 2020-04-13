@@ -217,5 +217,5 @@ DELETE HTTP REQUEST, uses the apisauce.get underneath the hood.
  * @param  {} api: default is getLatestApiClient()
  * @param  {} axiosConfig: custom axiosConfig for this request
  */
-function deleteRequest (pathname, include, filter, id, api, axiosConfig)
+function deleteRequest (pathname, id, api, axiosConfig)
 ```
