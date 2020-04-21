@@ -11,6 +11,16 @@ Provides methods to make your API call as well as updates the redux store with t
 
 - Setup in 3 easy steps
 
+## Installation
+
+```
+yarn add jsonapi-redux-data
+```
+
+```
+npm i jsonapi-redux-data
+```
+
 ## Usage
 
 - Update the reducers / rootReducers like this
