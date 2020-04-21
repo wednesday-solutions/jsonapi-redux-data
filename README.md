@@ -17,6 +17,8 @@ Provides methods to make your API call as well as updates the redux store with t
 yarn add jsonapi-redux-data
 ```
 
+**OR**
+
 ```
 npm i jsonapi-redux-data
 ```
