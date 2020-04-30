@@ -1,6 +1,6 @@
 {
   "name": "jsonapi-redux-data",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "Library that makes integration of jsonapi with redux effortless and easy",
   "repository": {
     "type": "git",
