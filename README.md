@@ -1,8 +1,8 @@
 # JsonApi Redux Data
 
-JsonApi Redux data is a one stop shop for all your api needs!
+JsonApi Redux data is a one stop shop for all your jsonapi needs!
 Provides methods to make your API call and formats and updates data in the redux store.
-It joins all of your relations so that accessing it is as easy as _entity.relationship_ 
+It joins all of your relations so that accessing it is as easy as _entity.relationship_
 
 **For example** if you made an API call to `base-url/tasks?include=list`, you can access your relationships as easily as **tasks[index].list**
 
