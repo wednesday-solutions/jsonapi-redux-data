@@ -76,7 +76,7 @@ npm i jsonapi-redux-data
 ```
   getApi({
     pathname: 'tasks',
-    includes: 'lists',
+    include: 'lists',
     levelOfNesting: 3
   });
 ```
