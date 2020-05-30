@@ -1,5 +1,7 @@
 # JsonApi Redux Data
 
+![](jsonapi-redux-data.svg)
+
 JsonApi Redux data is a one stop shop for all your jsonapi needs!
 Provides methods to make your API call and formats and updates data in the redux store.
 It joins all of your relations so that accessing it is as easy as _entity.relationship_
