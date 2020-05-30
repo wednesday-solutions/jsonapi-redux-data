@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" viewBox="0 0 512 512">
+  <defs>
+    <clipPath id="clip-Redux_API">
+      <rect width="512" height="512"/>
+    </clipPath>
+  </defs>
+  <g id="Redux_API" clip-path="url(#clip-Redux_API)">
+    <g id="Group_36" data-name="Group 36" transform="translate(-139 -128)">
+      <g id="Group_35" data-name="Group 35" transform="translate(175 162)">
+        <g id="Group_17" data-name="Group 17">
+          <g id="Group_14" data-name="Group 14" transform="translate(80.663 205.572)">
+            <path id="Path_17" data-name="Path 17" d="M61.957,0Q20.875.535,20.875,41.483V81.628Q20.875,108.659,0,110V125.52q20.875,1.338,20.875,28.9V193.5q0,41.483,41.082,42.019V218.389q-21.277-.535-21.277-26.5V152.685q0-28.1-20.073-34.525v-.535Q40.68,111.6,40.68,83.368V44.695q0-14.854,4.751-21.21t16.526-6.624Z" transform="translate(30.979 194.47) rotate(-120)" fill="#764abc"/>
+            <circle id="Ellipse_14" data-name="Ellipse 14" cx="23.224" cy="23.224" r="23.224" transform="translate(177.309 0)" fill="#764abc"/>
+          </g>
+          <g id="Group_15" data-name="Group 15" transform="translate(285.887 97.235) rotate(120)">
+            <path id="Path_17-2" data-name="Path 17" d="M61.957,0Q20.875.535,20.875,41.483V81.628Q20.875,108.659,0,110V125.52q20.875,1.338,20.875,28.9V193.5q0,41.483,41.082,42.019V218.389q-21.277-.535-21.277-26.5V152.685q0-28.1-20.073-34.525v-.535Q40.68,111.6,40.68,83.368V44.695q0-14.854,4.751-21.21t16.526-6.624Z" transform="translate(30.979 194.47) rotate(-120)" fill="#764abc"/>
+            <circle id="Ellipse_14-2" data-name="Ellipse 14" cx="23.224" cy="23.224" r="23.224" transform="translate(177.309)" fill="#764abc"/>
+          </g>
+          <g id="Group_16" data-name="Group 16" transform="matrix(-0.454, -0.891, 0.891, -0.454, 265.92, 340.145)">
+            <path id="Path_17-3" data-name="Path 17" d="M61.957,0Q20.875.535,20.875,41.483V81.628Q20.875,108.659,0,110V125.52q20.875,1.338,20.875,28.9V193.5q0,41.483,41.082,42.019V218.389q-21.277-.535-21.277-26.5V152.685q0-28.1-20.073-34.525v-.535Q40.68,111.6,40.68,83.368V44.695q0-14.854,4.751-21.21t16.526-6.624Z" transform="translate(30.979 194.47) rotate(-120)" fill="#764abc"/>
+            <circle id="Ellipse_14-3" data-name="Ellipse 14" cx="23.224" cy="23.224" r="23.224" transform="translate(177.309)" fill="#764abc"/>
+          </g>
+        </g>
+      </g>
+      <g id="Group_21" data-name="Group 21" transform="translate(246.037 567.457)">
+        <text id="jsonapi-redux-data" transform="translate(-0.037 24.542)" fill="#764abc" font-size="27" font-family="Raleway-Bold, Raleway" font-weight="700"><tspan x="0" y="0">JSONAPI-REDUX-DATA</tspan></text>
+      </g>
+    </g>
+  </g>
+</svg>
