@@ -1,5 +1,5 @@
-import { initialState } from 'reducers/jsonApiReducer'
+import { initialState } from 'reducers/jsonApiReducer';
 
-export const selectApiDomain = state => (state.api || initialState).toJS()
+export const selectApiDomain = state => ({ ...state.api } || { ...initialState });
 
-export default selectApiDomain
+export default selectApiDomain;

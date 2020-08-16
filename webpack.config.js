@@ -1,5 +1,8 @@
 const path = require('path');
-
+const webpack = require('webpack');
+const TerserPlugin = require('terser-webpack-plugin');
+var LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 module.exports = {
   mode: 'production',
   entry: './src/index.js',
@@ -17,6 +20,28 @@ module.exports = {
       root: '_'
     }
   },
+  optimization: {
+    minimize: true,
+    usedExports: true,
+    providedExports: true,
+    minimizer: [
+      new TerserPlugin({
+        cache: true,
+        parallel: true,
+        sourceMap: true,
+        terserOptions: {
+          // https://github.com/webpack-contrib/terser-webpack-plugin#terseroptions
+        }
+      })
+    ]
+  },
+  plugins: [
+    new webpack.EnvironmentPlugin({
+      NODE_ENV: 'production'
+    }),
+    new LodashModuleReplacementPlugin(),
+    new BundleAnalyzerPlugin()
+  ],
   resolve: {
     modules: ['node_modules', 'app'],
     alias: {

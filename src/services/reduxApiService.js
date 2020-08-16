@@ -1,10 +1,10 @@
-import { jsonApiCreators } from 'reducers/jsonApiReducer';
+import { actions } from 'reducers/actions';
 import { selectApiDomain } from 'selectors/selectors';
 import { deleteRequest, getRequest, patchRequest, postRequest } from './apiService';
 import { createDeepInclude } from 'utils/jsonApiUtils';
 import { getIncludeList, getStore } from 'utils';
 
-const { successApi, deleteSuccessApi } = jsonApiCreators;
+const { successApi, deleteSuccessApi } = actions;
 
 /**
  *

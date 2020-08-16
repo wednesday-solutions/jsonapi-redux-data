@@ -1,26 +1,18 @@
-import { createActions } from 'reduxsauce';
-import { fromJS } from 'immutable';
 import merge from 'deepmerge';
-import { overwriteMerge, combineMerge } from 'utils';
+import { overwriteMerge } from 'utils';
+import { actionTypes } from './actions';
 
-export const createReducerActions = () =>
-  createActions({
-    successApi: ['responsePayload'],
-    deleteSuccessApi: ['responsePayload', 'includeList']
-  });
-export const { Types: jsonApiTypes, Creators: jsonApiCreators } = createReducerActions();
-export const initialState = fromJS({});
+export const initialState = {};
 
 export const jsonApiReducer = (state = initialState, action) => {
   switch (action.type) {
-    case jsonApiTypes.SUCCESS_API:
-      return fromJS(
-        merge.all([state.toJS(), action.responsePayload], {
-          arrayMerge: overwriteMerge
-        })
-      );
-    case jsonApiTypes.DELETE_SUCCESS_API:
-      return fromJS(action.responsePayload);
+    case actionTypes.SUCCESS_API:
+      return merge.all([{ ...state }, action.responsePayload], {
+        arrayMerge: overwriteMerge
+      });
+
+    case actionTypes.DELETE_SUCCESS_API:
+      return { ...action.responsePayload };
   }
   return state;
 };
