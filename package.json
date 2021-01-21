@@ -63,7 +63,7 @@
     "apisauce": "^1.1.0",
     "cross-env": "5.2.0",
     "deepmerge": "^4.2.2",
-    "immer": "3.0.0",
+    "immer": "8.0.1",
     "immutable": "^4.0.0-rc.12",
     "lodash": "4.17.11",
     "map-keys-deep": "^0.0.2",
